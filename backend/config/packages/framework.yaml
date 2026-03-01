@@ -1,0 +1,56 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    test: ~
+    router:
+        utf8: true
+    serializer:
+        enabled: true
+    validation:
+        enabled: true
+    property_access:
+        enabled: true
+
+doctrine_mongodb:
+    auto_generate_proxy_classes: true
+    auto_generate_hydrator_classes: true
+    connections:
+        default:
+            server: '%env(MONGODB_URL)%'
+            options: {}
+    default_database: '%env(MONGODB_DB)%'
+    document_managers:
+        default:
+            auto_mapping: true
+            mappings:
+                App:
+                    type: attribute
+                    dir: '%kernel.project_dir%/src/Document'
+                    prefix: App\Document
+
+nelmio_cors:
+    defaults:
+        allow_origin: ['%env(CORS_ALLOW_ORIGIN)%']
+        allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
+        allow_headers: ['Content-Type', 'Authorization']
+        max_age: 3600
+    paths:
+        '^/api/':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'PUT', 'PATCH', 'GET', 'DELETE', 'OPTIONS']
+
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Warehouse Management API
+            description: API for managing warehouse inventory, products, and stock movements
+            version: 1.0.0
+        servers:
+            - url: http://localhost:8080
+              description: Local development server
+    areas:
+        path_patterns:
+            - ^/api(?!/doc$)
+
+twig:
+    default_path: '%kernel.project_dir%/templates'

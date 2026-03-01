@@ -1,0 +1,8 @@
+framework:
+    test: true
+
+doctrine_mongodb:
+    connections:
+        default:
+            server: 'mongodb://localhost:27017'
+    default_database: warehouse_test

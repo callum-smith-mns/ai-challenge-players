@@ -1,0 +1,5 @@
+when@test:
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
